@@ -15,14 +15,14 @@ import { invoke } from '@tauri-apps/api/tauri';
  * @since 1.0.0.
  */
 async function writeText(text, opts) {
-    return invoke('plugin:clipboard|write', {
+    return invoke("plugin:clipboard|write", {
         data: {
-            kind: 'PlainText',
+            kind: "PlainText",
             options: {
                 label: opts === null || opts === void 0 ? void 0 : opts.label,
-                text
-            }
-        }
+                text,
+            },
+        },
     });
 }
 /**
@@ -35,7 +35,7 @@ async function writeText(text, opts) {
  * @since 1.0.0.
  */
 async function readText() {
-    const kind = await invoke('plugin:clipboard|read');
+    const kind = await invoke("plugin:clipboard|read");
     return kind.options;
 }
 
