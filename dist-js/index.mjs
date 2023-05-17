@@ -5,7 +5,7 @@ import { invoke } from '@tauri-apps/api/tauri';
  * Writes plain text to the clipboard.
  * @example
  * ```typescript
- * import { writeText, readText } from 'tauri-plugin-clipboard-api';
+ * import { writeText, readText } from '@tauri-apps/plugin-clipboard';
  * await writeText('Tauri is awesome!');
  * assert(await readText(), 'Tauri is awesome!');
  * ```
@@ -29,7 +29,7 @@ async function writeText(text, opts) {
  * Gets the clipboard content as plain text.
  * @example
  * ```typescript
- * import { readText } from 'tauri-plugin-clipboard-api';
+ * import { readText } from '@tauri-apps/plugin-clipboard';
  * const clipboardText = await readText();
  * ```
  * @since 1.0.0.
