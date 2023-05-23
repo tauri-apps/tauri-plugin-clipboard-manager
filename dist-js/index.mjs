@@ -1,6 +1,6 @@
-import { invoke } from '@tauri-apps/api/tauri';
-
 // Copyright 2019-2023 Tauri Programme within The Commons Conservancy
+// SPDX-License-Identifier: Apache-2.0
+// SPDX-License-Identifier: MIT
 /**
  * Writes plain text to the clipboard.
  * @example
@@ -15,7 +15,7 @@ import { invoke } from '@tauri-apps/api/tauri';
  * @since 1.0.0.
  */
 async function writeText(text, opts) {
-    return invoke("plugin:clipboard|write", {
+    return window.__TAURI_INVOKE__("plugin:clipboard|write", {
         data: {
             kind: "PlainText",
             options: {
@@ -35,7 +35,7 @@ async function writeText(text, opts) {
  * @since 1.0.0.
  */
 async function readText() {
-    const kind = await invoke("plugin:clipboard|read");
+    const kind = await window.__TAURI_INVOKE__("plugin:clipboard|read");
     return kind.options;
 }
 
