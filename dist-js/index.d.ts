@@ -19,7 +19,7 @@ declare global {
  *
  * @returns A promise indicating the success or failure of the operation.
  *
- * @since 1.0.0.
+ * @since 2.0.0
  */
 declare function writeText(text: string, opts?: {
     label?: string;
@@ -31,7 +31,7 @@ declare function writeText(text: string, opts?: {
  * import { readText } from '@tauri-apps/plugin-clipboard';
  * const clipboardText = await readText();
  * ```
- * @since 1.0.0.
+ * @since 2.0.0
  */
 declare function readText(): Promise<string>;
 export { writeText, readText };

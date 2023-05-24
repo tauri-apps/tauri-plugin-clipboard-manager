@@ -12,7 +12,7 @@
  *
  * @returns A promise indicating the success or failure of the operation.
  *
- * @since 1.0.0.
+ * @since 2.0.0
  */
 async function writeText(text, opts) {
     return window.__TAURI_INVOKE__("plugin:clipboard|write", {
@@ -32,7 +32,7 @@ async function writeText(text, opts) {
  * import { readText } from '@tauri-apps/plugin-clipboard';
  * const clipboardText = await readText();
  * ```
- * @since 1.0.0.
+ * @since 2.0.0
  */
 async function readText() {
     const kind = await window.__TAURI_INVOKE__("plugin:clipboard|read");
