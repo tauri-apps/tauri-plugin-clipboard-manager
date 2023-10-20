@@ -1,14 +1,4 @@
 /**
- * Read and write to the system clipboard.
- *
- * @module
- */
-declare global {
-    interface Window {
-        __TAURI_INVOKE__: <T>(cmd: string, args?: unknown) => Promise<T>;
-    }
-}
-/**
  * Writes plain text to the clipboard.
  * @example
  * ```typescript
