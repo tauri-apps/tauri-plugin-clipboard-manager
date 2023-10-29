@@ -24,8 +24,7 @@ import { invoke } from '@tauri-apps/api/primitives';
 async function writeText(text, opts) {
     return invoke("plugin:clipboard|write", {
         data: {
-            kind: "PlainText",
-            options: {
+            plainText: {
                 label: opts === null || opts === void 0 ? void 0 : opts.label,
                 text,
             },
@@ -43,7 +42,7 @@ async function writeText(text, opts) {
  */
 async function readText() {
     const kind = await invoke("plugin:clipboard|read");
-    return kind.options;
+    return kind.plainText.text;
 }
 
 export { readText, writeText };
