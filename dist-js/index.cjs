@@ -1,4 +1,6 @@
-import { invoke } from '@tauri-apps/api/primitives';
+'use strict';
+
+var primitives = require('@tauri-apps/api/primitives');
 
 // Copyright 2019-2023 Tauri Programme within The Commons Conservancy
 // SPDX-License-Identifier: Apache-2.0
@@ -22,10 +24,10 @@ import { invoke } from '@tauri-apps/api/primitives';
  * @since 2.0.0
  */
 async function writeText(text, opts) {
-    return invoke("plugin:clipboard|write", {
+    return primitives.invoke("plugin:clipboard|write", {
         data: {
             plainText: {
-                label: opts === null || opts === void 0 ? void 0 : opts.label,
+                label: opts?.label,
                 text,
             },
         },
@@ -41,9 +43,9 @@ async function writeText(text, opts) {
  * @since 2.0.0
  */
 async function readText() {
-    const kind = await invoke("plugin:clipboard|read");
+    const kind = await primitives.invoke("plugin:clipboard|read");
     return kind.plainText.text;
 }
 
-export { readText, writeText };
-//# sourceMappingURL=index.mjs.map
+exports.readText = readText;
+exports.writeText = writeText;
