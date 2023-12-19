@@ -1,6 +1,6 @@
 'use strict';
 
-var primitives = require('@tauri-apps/api/primitives');
+var core = require('@tauri-apps/api/core');
 
 // Copyright 2019-2023 Tauri Programme within The Commons Conservancy
 // SPDX-License-Identifier: Apache-2.0
@@ -24,7 +24,7 @@ var primitives = require('@tauri-apps/api/primitives');
  * @since 2.0.0
  */
 async function writeText(text, opts) {
-    return primitives.invoke("plugin:clipboard|write", {
+    return core.invoke("plugin:clipboard|write", {
         data: {
             plainText: {
                 label: opts?.label,
@@ -43,7 +43,7 @@ async function writeText(text, opts) {
  * @since 2.0.0
  */
 async function readText() {
-    const kind = await primitives.invoke("plugin:clipboard|read");
+    const kind = await core.invoke("plugin:clipboard|read");
     return kind.plainText.text;
 }
 
