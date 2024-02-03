@@ -24,7 +24,7 @@ var core = require('@tauri-apps/api/core');
  * @since 2.0.0
  */
 async function writeText(text, opts) {
-    return core.invoke("plugin:clipboard|write", {
+    return core.invoke("plugin:clipboard-manager|write", {
         data: {
             plainText: {
                 label: opts?.label,
@@ -43,7 +43,7 @@ async function writeText(text, opts) {
  * @since 2.0.0
  */
 async function readText() {
-    const kind = await core.invoke("plugin:clipboard|read");
+    const kind = await core.invoke("plugin:clipboard-manager|read");
     return kind.plainText.text;
 }
 
