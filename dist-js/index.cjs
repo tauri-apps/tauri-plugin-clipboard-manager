@@ -46,6 +46,45 @@ async function readText() {
     const kind = await core.invoke("plugin:clipboard-manager|read");
     return kind.plainText.text;
 }
+/**
+ * Writes HTML or fallbacks to write provided plain text to the clipboard.
+ * @example
+ * ```typescript
+ * import { writeHtml, readHtml } from '@tauri-apps/plugin-clipboard-manager';
+ * await writeHtml('<h1>Tauri is awesome!</h1>', 'plaintext');
+ * await writeHtml('<h1>Tauri is awesome!</h1>', '<h1>Tauri is awesome</h1>'); // Will write "<h1>Tauri is awesome</h1>" as plain text
+ * assert(await readText(), '<h1>Tauri is awesome!</h1>');
+ * ```
+ *
+ * @returns A promise indicating the success or failure of the operation.
+ *
+ * @since 2.0.0
+ */
+async function writeHtml(html, altHtml) {
+    return core.invoke("plugin:clipboard-manager|write_html", {
+        data: {
+            html: {
+                html,
+                altHtml,
+            },
+        },
+    });
+}
+/**
+ * Clears the clipboard.
+ * @example
+ * ```typescript
+ * import { clear } from '@tauri-apps/plugin-clipboard-manager';
+ * await clear();
+ * ```
+ * @since 2.0.0
+ */
+async function clear() {
+    await core.invoke("plugin:clipboard-manager|clear");
+    return;
+}
 
+exports.clear = clear;
 exports.readText = readText;
+exports.writeHtml = writeHtml;
 exports.writeText = writeText;

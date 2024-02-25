@@ -24,4 +24,29 @@ declare function writeText(text: string, opts?: {
  * @since 2.0.0
  */
 declare function readText(): Promise<string>;
-export { writeText, readText };
+/**
+ * Writes HTML or fallbacks to write provided plain text to the clipboard.
+ * @example
+ * ```typescript
+ * import { writeHtml, readHtml } from '@tauri-apps/plugin-clipboard-manager';
+ * await writeHtml('<h1>Tauri is awesome!</h1>', 'plaintext');
+ * await writeHtml('<h1>Tauri is awesome!</h1>', '<h1>Tauri is awesome</h1>'); // Will write "<h1>Tauri is awesome</h1>" as plain text
+ * assert(await readText(), '<h1>Tauri is awesome!</h1>');
+ * ```
+ *
+ * @returns A promise indicating the success or failure of the operation.
+ *
+ * @since 2.0.0
+ */
+declare function writeHtml(html: string, altHtml?: string): Promise<void>;
+/**
+ * Clears the clipboard.
+ * @example
+ * ```typescript
+ * import { clear } from '@tauri-apps/plugin-clipboard-manager';
+ * await clear();
+ * ```
+ * @since 2.0.0
+ */
+declare function clear(): Promise<void>;
+export { writeText, readText, writeHtml, clear };
