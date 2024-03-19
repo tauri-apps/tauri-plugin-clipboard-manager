@@ -1,4 +1,5 @@
 import { invoke } from '@tauri-apps/api/core';
+import { Image, transformImage } from '@tauri-apps/api/image';
 
 // Copyright 2019-2023 Tauri Programme within The Commons Conservancy
 // SPDX-License-Identifier: Apache-2.0
@@ -22,7 +23,7 @@ import { invoke } from '@tauri-apps/api/core';
  * @since 2.0.0
  */
 async function writeText(text, opts) {
-    return invoke("plugin:clipboard-manager|write", {
+    return invoke("plugin:clipboard-manager|write_text", {
         data: {
             plainText: {
                 label: opts?.label,
@@ -41,11 +42,53 @@ async function writeText(text, opts) {
  * @since 2.0.0
  */
 async function readText() {
-    const kind = await invoke("plugin:clipboard-manager|read");
+    const kind = await invoke("plugin:clipboard-manager|read_text");
     return kind.plainText.text;
 }
 /**
- * Writes HTML or fallbacks to write provided plain text to the clipboard.
+ * Gets the clipboard content as Uint8Array image.
+ * @example
+ * ```typescript
+ * import { readImage } from '@tauri-apps/plugin-clipboard-manager';
+ *
+ * const clipboardImage = await readImage();
+ * const blob = new Blob([clipboardImage.bytes], { type: 'image' })
+ * const url = URL.createObjectURL(blob)
+ * ```
+ * @since 2.0.0
+ */
+async function readImage() {
+    return await invoke("plugin:clipboard-manager|read_image").then((rid) => new Image(rid));
+}
+/**
+ * Writes image buffer to the clipboard.
+ * @example
+ * ```typescript
+ * import { writeImage } from '@tauri-apps/plugin-clipboard-manager';
+ * const buffer = [
+ *   // A red pixel
+ *   255, 0, 0, 255,
+ *
+ *  // A green pixel
+ *   0, 255, 0, 255,
+ * ];
+ * await writeImage(buffer);
+ *
+ * @returns A promise indicating the success or failure of the operation.
+ *
+ * @since 2.0.0
+ */
+async function writeImage(image) {
+    return invoke("plugin:clipboard-manager|write_image", {
+        data: {
+            image: {
+                image: transformImage(image),
+            },
+        },
+    });
+}
+/**
+ * * Writes HTML or fallbacks to write provided plain text to the clipboard.
  * @example
  * ```typescript
  * import { writeHtml, readHtml } from '@tauri-apps/plugin-clipboard-manager';
@@ -82,4 +125,4 @@ async function clear() {
     return;
 }
 
-export { clear, readText, writeHtml, writeText };
+export { clear, readImage, readText, writeHtml, writeImage, writeText };

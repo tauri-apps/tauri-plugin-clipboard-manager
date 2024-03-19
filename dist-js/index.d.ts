@@ -1,3 +1,4 @@
+import { Image } from "@tauri-apps/api/image";
 /**
  * Writes plain text to the clipboard.
  * @example
@@ -25,7 +26,39 @@ declare function writeText(text: string, opts?: {
  */
 declare function readText(): Promise<string>;
 /**
- * Writes HTML or fallbacks to write provided plain text to the clipboard.
+ * Gets the clipboard content as Uint8Array image.
+ * @example
+ * ```typescript
+ * import { readImage } from '@tauri-apps/plugin-clipboard-manager';
+ *
+ * const clipboardImage = await readImage();
+ * const blob = new Blob([clipboardImage.bytes], { type: 'image' })
+ * const url = URL.createObjectURL(blob)
+ * ```
+ * @since 2.0.0
+ */
+declare function readImage(): Promise<Image>;
+/**
+ * Writes image buffer to the clipboard.
+ * @example
+ * ```typescript
+ * import { writeImage } from '@tauri-apps/plugin-clipboard-manager';
+ * const buffer = [
+ *   // A red pixel
+ *   255, 0, 0, 255,
+ *
+ *  // A green pixel
+ *   0, 255, 0, 255,
+ * ];
+ * await writeImage(buffer);
+ *
+ * @returns A promise indicating the success or failure of the operation.
+ *
+ * @since 2.0.0
+ */
+declare function writeImage(image: string | Image | Uint8Array | ArrayBuffer | number[]): Promise<void>;
+/**
+ * * Writes HTML or fallbacks to write provided plain text to the clipboard.
  * @example
  * ```typescript
  * import { writeHtml, readHtml } from '@tauri-apps/plugin-clipboard-manager';
@@ -49,4 +82,4 @@ declare function writeHtml(html: string, altHtml?: string): Promise<void>;
  * @since 2.0.0
  */
 declare function clear(): Promise<void>;
-export { writeText, readText, writeHtml, clear };
+export { writeText, readText, writeHtml, clear, readImage, writeImage };
