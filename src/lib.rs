@@ -10,7 +10,7 @@
 )]
 
 use tauri::{
-    Manager, RunEvent, Runtime,
+    Manager, Runtime,
     plugin::{Builder, TauriPlugin},
 };
 
@@ -62,7 +62,7 @@ pub fn init<R: Runtime>() -> TauriPlugin<R> {
         })
         .on_event(|_app, _event| {
             #[cfg(desktop)]
-            if let RunEvent::Exit = _event {
+            if let tauri::RunEvent::Exit = _event {
                 _app.clipboard().cleanup();
             }
         })
