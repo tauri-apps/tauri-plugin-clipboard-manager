@@ -1,6 +1,6 @@
 [package]
 name = "tauri-plugin-clipboard-manager"
-version = "3.0.0-alpha.2"
+version = "3.0.0-alpha.3"
 description = "Read and write to the system clipboard."
 edition = { workspace = true }
 authors = { workspace = true }
@@ -40,4 +40,4 @@ thiserror = { workspace = true }
 
 
 [target."cfg(any(target_os = \"macos\", windows, target_os = \"linux\", target_os = \"dragonfly\", target_os = \"freebsd\", target_os = \"openbsd\", target_os = \"netbsd\"))".dependencies]
-arboard = { version = "3", features = ["wayland-data-control"] }
+arboard = { version = "3.6", features = ["wayland-data-control"] }

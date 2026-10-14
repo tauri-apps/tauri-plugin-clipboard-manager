@@ -1,5 +1,10 @@
 # Changelog
 
+## [3.0.0-alpha.3]
+
+- [``](https://github.com/tauri-apps/plugins-workspace/commit/undefined) Ported changes from v2.
+- [``](https://github.com/tauri-apps/plugins-workspace/commit/undefined) Update to tauri v3.0.0-alpha.4 and `@tauri-apps/api` v3.0.0-alpha.2.
+
 ## [3.0.0-alpha.2]
 
 - [`2fd27c2d`](https://github.com/tauri-apps/plugins-workspace/commit/2fd27c2d43966a86e436ecd538e133e1812cc641) Update MSRV to 1.95 to match tauri.
@@ -11,6 +16,18 @@
 ## [3.0.0-alpha.0]
 
 - [`363438b5`](https://github.com/tauri-apps/plugins-workspace/commit/363438b50a09162379d57c7c7bfc132520c1e5d4) Update to tauri 3.0 alpha.
+
+## [2.5.0]
+
+- [`57297f3f`](https://github.com/tauri-apps/plugins-workspace/commit/57297f3fb1af894c7e51d881154ffc6d10e6bd3a) ([#3376](https://github.com/tauri-apps/plugins-workspace/pull/3376) by [@umtdg](https://github.com/tauri-apps/plugins-workspace/../../umtdg)) Added `writeSecret` (`Clipboard::write_secret` in Rust) to write sensitive text, such as passwords, to the clipboard. Clipboard managers are asked to keep it out of their history on Windows, macOS and Linux. On Android the clip is flagged as sensitive, and on iOS it is not synced to other devices.
+
+## [2.4.2]
+
+- [`42ae8b45`](https://github.com/tauri-apps/plugins-workspace/commit/42ae8b4501f3628cddeab3973eb38a7593304cc8) ([#3684](https://github.com/tauri-apps/plugins-workspace/pull/3684)) On iOS, mark the plugin's `init_plugin_*` entry point `public` so release builds made with Xcode 27 keep it global and link.
+
+## [2.4.1]
+
+- [`569ee82c`](https://github.com/tauri-apps/plugins-workspace/commit/569ee82cf61a358b4c73ba52f2e99f3317ec05d0) Fix the docs.rs build for Android: the build script now detects docs.rs through the `DOCS_RS` environment variable, since `cfg(docsrs)` is never set for build scripts.
 
 ## [2.4.0]
 
